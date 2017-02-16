@@ -1,32 +1,35 @@
 'use strict';
 
-const bookshelf = require('../lib/db');
-const config = require('../lib/config');
-const moment = require('moment');
-const AuthService = require('./../service/AuthenticationService');
+const autoIncrement = require('mongoose-auto-increment');
+const mongoose = require('../lib/db');
 
-let UserModel = bookshelf.Model.extend({
-  tableName: 'user',
-  idAttribute: 'user_id'
+var Schema = mongoose.Schema;
+
+
+let UserModel = new Schema({
+  name: String,
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  created_at: Date,
+  updated_at: Date
 });
 
-UserModel.prototype.validate = function(model, attrs, options) {
-  if (this.hasChanged('password')) {
-    attrs.password = AuthService.createHash(attrs.password);
-  }
-};
+UserModel.pre('save', function(next) {
+  // get the current date
+  var currentDate = new Date();
 
-UserModel.prototype.verifyPassword = function(password) {
-  return AuthService.validateHash(password, this.get('password'));
-};
+  // change the updated_at field to current date
+  this.updated_at = currentDate;
 
-UserModel.prototype.serialize = function() {
-  let obj = {
-    id: this.get('user_id'),
-    name : this.get('name'),
-    created: moment(this.get('created')).format('YYYY-MM-DD HH:mm')
-  };
-  return obj;
-};
+  // if created_at doesn't exist, add to that field
+  if (!this.created_at)
+    this.created_at = currentDate;
 
-module.exports = UserModel;
+  next();
+});
+
+//implement mongo auto increment plugin
+/*autoIncrement.initialize(mongoose.connection);
+UserModel.plugin(autoIncrement.plugin, 'User');*/
+
+module.exports = mongoose.model('User', UserModel);

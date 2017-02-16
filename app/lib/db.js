@@ -1,9 +1,14 @@
 'use strict';
 
 var config = require('./config');
-var knex = require('knex')(config.db());
 
-const bookshelf = require('bookshelf')(knex);
-bookshelf.plugin('pagination');
+const mongoose = require('mongoose');
+const Promise = require('bluebird');
 
-module.exports = bookshelf;
+const mongoConfig = config.db();
+const connection = mongoConfig.connection+ mongoConfig.database;
+
+mongoose.connect(connection);
+mongoose.Promise = Promise;
+
+module.exports = mongoose;

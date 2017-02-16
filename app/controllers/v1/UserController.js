@@ -10,8 +10,8 @@ const UserService = require('../../service/UserService');
 const getUserObj = (req) => {
   return {
     name: req.input('name', null),
+    username: req.input('username', null),
     password: req.input('password', null),
-    email: req.input('email', null),
   }
 };
 
@@ -74,7 +74,8 @@ function UserController() {
       return UserService.create(userObj)
         .then((user) => {
             if (user) {
-              let id = user.get('user_id');
+              let id = user._id;
+
               var payload = {
                   iss: req.hostname,
                   sub: id,

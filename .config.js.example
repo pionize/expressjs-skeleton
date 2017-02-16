@@ -10,25 +10,8 @@ module.exports = {
     name: 'local'                               // logger name
   },
   database: {
-    client: 'mysql',                            // database driver (mysql, pg, oracle, sqlite3)
-    connection: {
-      host: '127.0.0.1',                        // database host, usually localhost or 127.0.0.1
-      user: 'root',                             // database username
-      password: '',                             // database password
-      database: 'app',                          // database name to connect to
-      port: 3306                                // database port
-    },
-    migrations: {
-      directory: __dirname + '/migrations',     // migration scripts
-      tableName: 'migrations'                   // to keep track of migration script that has been executed
-    },
-    seeds: {
-      directory: __dirname + '/seeds'           // production seeds
-    },
-    test_seeds: {
-      directory: __dirname + '/test_seeds'      // test seeds
-    },
-    debug: true,
+    connection: 'mongodb://localhost/',
+    database: 'express-skeleton'
   },
   jwtExpired: 3600,
   jwtSecret: 'express',
