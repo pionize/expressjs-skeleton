@@ -1,0 +1,16 @@
+build
+node_modules
+public
+ncp-debug.log
+npm-debug.log
+log
+
+.idea/
+.config.js
+.db.js
+.env
+
+data/db.sqlite3
+.vscode
+jsconfig.json
+
