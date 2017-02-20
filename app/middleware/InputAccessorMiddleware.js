@@ -11,7 +11,11 @@ function InputAccessorMiddleware(req, res, next) {
     } else if (_.has(req.query, path)) {
       return xss(_.get(req.query, path));
     } else if (_.has(req.body, path)) {
-      return xss(_.get(req.body, path));
+      const value = _.get(req.body, path);
+      if (value instanceof Array || value instanceof Object) {
+        return value;
+      }
+      return xss(value);
     } else if (_.has(req, path)) {
       return _.get(req, path);
     }
