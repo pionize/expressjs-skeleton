@@ -1,4 +1,4 @@
-### Dev Notes
+### Development Notes
 
 #### Setup di local environment
 
