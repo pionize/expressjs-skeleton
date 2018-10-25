@@ -11,7 +11,7 @@
 - Eksekusi migration script-nya lagi `knex --knexfile=.db.js migrate:latest`.
 - Test fungsi rollback-nya pake `knex --knexfile=.db.js migrate:rollback` (cek apakah rollback script-nya masih error ato perlu dibenerin).
 - Test `npm test`
-- Jalanin servernya pake `npm start`
+- Jalankan server pake `npm start`
 
 #### Generate Konten DB
 
