@@ -5,7 +5,7 @@
 - Clone dari repository.
 - Install dependency: `npm install`.
 - Install global dependency: `npm install -g knex gulp`.
-- Buat config baru `touch .config.js`, lalu edit isinya (template-nya ada di `.config.js.example`).
+- Copy config dari .config.js.example, kemudian buat config baru `touch .config.js`, lalu edit isinya.
 - Eksekusi migration script `knex --knexfile=.db.js migrate:latest`.
 - Buat migration script baru kalau ada perubahan skema database `knex --knexfile=.db.js migrate:make {NAMA_SCRIPT-NYA}`, lalu edit file-nya.
 - Eksekusi migration script-nya lagi `knex --knexfile=.db.js migrate:latest`.
